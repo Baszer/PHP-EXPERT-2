@@ -169,6 +169,9 @@ require "db.conn.php";
       <a href="dashboardMedewerkers.php" class="list-group-item">Home</a>
       <a href="add_fietsM.php" class="list-group-item">Fiets toevoegen</a>
       <a href="add_reparatieM.php" class="list-group-item">Reparatie toevoegen</a>
+      <a href="add_medewerker.php" class="list-group-item">Medewerker toevoegen</a>
+      <a href="add_user.php" class="list-group-item">Gebruiker toevoegen</a>
+
       <a href="logout.php" id="logout" class="list-group-item">log out</a>
     </nav>
   </aside>

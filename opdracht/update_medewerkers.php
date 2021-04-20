@@ -71,14 +71,22 @@ $klusid = $_GET['id'];
             $adres = $rows['adress'];
             $birthdate = $rows['birthdate'];
              echo '<h1 class="h3 mb-3 fw-normal">plan a task</h1>';
-             echo "<input type='text' class='form-control' name='subject' id='subject' value='$voornaam'>";
-             echo "<input type='text' class='form-control' name='subject1' id='subject1' value='$achternaam'>";
-             echo "<input type='text' class='form-control' name='subject2' id='subject2' value='$password'>";
-             echo "<input type='text' class='form-control' name='subject3' id='subject3' value='$emailpf'>";
-             echo "<input type='text' class='form-control' name='subject4' id='subject4' value='$telefoon'>";
-             echo "<input type='text' class='form-control' name='subject5' id='subject5' value='$location'>";
-             echo "<input type='text' class='form-control' name='subject6' id='subject6' value='$adres'>";
-             echo "<input type='date' class='form-control' name='subject7' id='subject7' value='$birthdate'>";
+             echo 'voornaam';
+             echo "<input type='text' class='form-control'  name='subject'  id='subject' value='$voornaam'>";
+             echo 'achternaam';
+             echo "<input type='text' class='form-control'  name='subject1' id='subject1' value='$achternaam'>";
+             echo 'wachtwoord';
+             echo "<input type='text' class='form-control'  name='subject2' id='subject2' value='$password'>";
+             echo 'email';
+             echo "<input type='text' class='form-control'  name='subject3' id='subject3' value='$emailpf'>";
+             echo 'telefoon';
+             echo "<input type='text' class='form-control'  name='subject4' id='subject4' value='$telefoon'>";
+             echo 'Locatie';
+             echo "<input type='text' class='form-control'  name='subject5' id='subject5' value='$location'>";
+             echo 'Adres';
+             echo "<input type='text' class='form-control'  name='subject6' id='subject6' value='$adres'>";
+             echo 'Birthdate';             
+             echo "<input type='date' class='form-control'  name='subject7' id='subject7' value='$birthdate'>";
          echo '<button class="w-100 btn btn-lg btn-primary" name="form_update" type="submit">Update</button>';
         }
       
@@ -110,6 +118,7 @@ $klusid = $_GET['id'];
       $stmt7->execute();      
        ?>
         
+   
         
       </form>
     </main>

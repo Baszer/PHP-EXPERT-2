@@ -4,15 +4,6 @@ session_start();
 error_reporting(0);
 require "menu.php";
 
-// if(isset($_POST['userDelete'])){
-//   $sql = "DELETE FROM users WHERE email = :ph_email";
-//   $stmt = $db_conn->prepare($sql); 
-//   $stmt->bindParam(":ph_email", $email );
-//   $stmt->execute();
-//   header("location: dashboard.php");
-
-
-// }
 
 ?>
 <!doctype html>
@@ -76,7 +67,7 @@ require "menu.php";
           <th>Bewerken</th>
         </tr>
         <?php
-        $stmttasks = $db_conn->prepare("SELECT * FROM fiets ");
+        $stmttasks = $db_conn->prepare("SELECT * FROM fiets");
         $stmttasks->execute();
         foreach ($stmttasks as $rows) {
           $uemail = $rows['id'];
@@ -105,11 +96,11 @@ require "menu.php";
           <th>tijdstip</th>
           <th>opmerkingen</th>
           <th>kosten</th>
+          <th>Merk</th>
           <th>Bewerken</th>
-          <th>merk</th>
         </tr>
         <?php
-        $stmttasks = $db_conn->prepare("SELECT * FROM reparatie JOIN fiets on fiets.id = reparatie.fiets_id");
+        $stmttasks = $db_conn->prepare("SELECT * FROM reparatie");  //JOIN fiets on fiets_id = reparatie.fiets_id
         $stmttasks->execute();
         foreach ($stmttasks as $rows) {
           $uemail = $rows['id'];
@@ -145,13 +136,13 @@ require "menu.php";
           <th>Bewerken</th>
         </tr>
         <?php
-        $stmttasks = $db_conn->prepare("SELECT * FROM users");
+        $stmttasks = $db_conn->prepare("SELECT * FROM gebruikers");
         $stmttasks->execute();
 
 
         foreach ($stmttasks as $rows) {
           $idname = $rows['id'];
-          echo "<tr><td>" . $rows['firstname'] . " " . $rows['lastname'] . "</td>";
+          echo "<tr><td>" . $rows['voornaam'] . " " . $rows['achternaam'] . "</td>";
           echo "<td>" . $rows['email'] . "</td>";
           echo "<td>" . $rows['telefoonnummer'] . "</td>";
           echo "<td>" . $rows[''] . "</td>";
@@ -184,7 +175,7 @@ require "menu.php";
         $stmttasks->execute();
         foreach ($stmttasks as $rows) {
           $idname = $rows['id'];
-          echo "<tr><td>" . $rows['firstname'] . " " . $rows['lastname'] . "</td>";
+          echo "<tr><td>" . $rows['voornaam'] . " " . $rows['achternaam'] . "</td>";
           echo "<td>" . $rows['email'] . "</td>";
           echo "<td>" . $rows['telefoonnummer'] . "</td>";
 

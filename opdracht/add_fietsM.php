@@ -3,26 +3,28 @@ require "db.conn.php";
 session_start();
 error_reporting(0);
 
+
 if (isset($_POST['form_fiets'])) {
     $merkv = $_POST['form_merk'];
     $modelv = $_POST['form_model'];
     $typev = $_POST['form_type'];
     $kleurv = $_POST['form_kleur'];
-    $remsoortv = $_POST['form_rem'];
+    $remv = $_POST['form_rem'];
+    $gebruikeridv = $_POST['form_gebruikerid'];
 
-    $sql = "INSERT INTO fiets (merk, model, type, kleur, rem) VALUES (:ph_merk,:ph_model,:ph_type,:ph_kleur,:ph_remsoort)";
+    $sql = "INSERT INTO fiets (merk, model, type, kleur, rem, gebruiker_id) VALUES (:ph_merk,:ph_model,:ph_type,:ph_kleur,:ph_rem,:ph_gebruikerid)";
     $stmt = $db_conn->prepare($sql);
     $stmt->bindParam(":ph_merk", $merkv);
     $stmt->bindParam(":ph_model", $modelv);
     $stmt->bindParam(":ph_type", $typev);
     $stmt->bindParam(":ph_kleur", $kleurv);
-    $stmt->bindParam(":ph_remsoort", $remsoortv);
+    $stmt->bindParam(":ph_rem", $remv);
+    $stmt->bindParam(":ph_gebruikerid", $gebruikeridv);
+    $stmt->execute();
     header("location: dashboardMedewerkers.php");
 
-    $stmt->execute();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +40,7 @@ if (isset($_POST['form_fiets'])) {
 </head>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Dashboard</a>
+        <a class="navbar-brand" href="dashboardMedewerkers.php">Dashboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -70,9 +72,11 @@ if (isset($_POST['form_fiets'])) {
             <label for="form_kleur" class="visually-hidden">Kleur</label>
             <input type="kleur" id="form_kleur" class="form-control" name="form_kleur" placeholder="kleur" required>
 
-            <label for="form_rem" class="visually-hidden">Rem soort</label>
+            <label for="form_rem" class="visually-hidden">Rem </label>
             <input type="rem" id="form_rem" class="form-control" name="form_rem" placeholder="rem" required>
 
+            <label for="form_gebruikerid" class="visually-hidden">Gebruiker ID </label>
+            <input type="rem" id="form_gebruikerid" class="form-control" name="form_gebruikerid" placeholder="gebruiker_id" required>
 
             <button class="w-100 btn btn-lg btn-primary" name="form_fiets" type="submit">add</button>
 

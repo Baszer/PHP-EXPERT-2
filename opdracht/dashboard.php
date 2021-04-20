@@ -66,7 +66,7 @@ $userid = $_SESSION['id'];
                   <th>type</th>
                   <th>rem</th>
                   <th>kleur</th>
-                  <th>Bewerken</th>
+                  <th>Kijken</th>
                 </tr>
                 <?php
                 
@@ -100,7 +100,7 @@ $userid = $_SESSION['id'];
                   <th>tijdstip</th>
                   <th>opmerkingen</th>
                   <th>kosten</th>
-                  <th>Bewerken</th>
+                  <th>Kijken</th>
                 </tr>
                 <?php
                 
@@ -111,7 +111,7 @@ $userid = $_SESSION['id'];
                               echo "<tr><td>" . $rows['titel']. "</td>";
                               echo "<td>" . $rows['datum']. "</td>";
                               echo "<td>" . $rows['tijdstip']. "</td>";
-                              echo "<td>" . $rows['opmerkingen']. "</td>";
+                              echo "<td>" . $rows['opmerking']. "</td>";
                               echo "<td>" . $rows['kosten']. "</td>";
                               echo "<td><a class='btn btn-warning' href='view_fiets.php?id=$uemail'><i class='fas fa-eye'> </i></a></tr>";
                              

@@ -12,7 +12,7 @@ if  (isset ($_POST['form_login'])){
   $statement->execute();
   $database_gegevens = $statement->fetch(PDO::FETCH_ASSOC);
       
-  if($database_gegevens['password'] == $password){
+  if($database_gegevens['wachtwoord'] == $password){
           echo 'Gebruiker mag inloggen!';
 
           session_start();
@@ -24,19 +24,19 @@ if  (isset ($_POST['form_login'])){
   
 
 }
-
+ 
 if  (isset ($_POST['form_login'])){
     
   $email = $_POST['form_email'];
   $password = $_POST['form_password'];
 
-  $sql = "SELECT * FROM users WHERE email = :ph_email";
+  $sql = "SELECT * FROM gebruikers WHERE email = :ph_email";
   $statement = $db_conn->prepare($sql);
   $statement->bindParam(":ph_email", $email);
   $statement->execute();
   $database_gegevens = $statement->fetch(PDO::FETCH_ASSOC);
       
-  if($database_gegevens['password'] == $password){
+  if($database_gegevens['wachtwoord'] == $password){
           echo 'Gebruiker mag inloggen!';
 
           session_start();

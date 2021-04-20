@@ -3,24 +3,34 @@ require "db.conn.php";
 session_start();
 error_reporting(0);
 
-if (isset($_POST['form_reparatie'])) {
-    $titelv = $_POST['form_titel'];
-    $datumv = $_POST['form_datum'];
-    $tijdv = $_POST['form_tijd'];
-    $opmerkingenv = $_POST['form_opmerkingen'];
-    $kostenv = $_POST['form_kosten'];
 
-    $sql = "INSERT INTO reparatie (titel, datum, tijd, opmerkingen, kosten) VALUES (:ph_titel,:ph_datum ,:ph_tijd,:ph_opmerkingen,:ph_kosten)";
-    $stmt = $db_conn->prepare($sql);
-    $stmt->bindParam(":ph_titel", $titelv);
-    $stmt->bindParam(":ph_datum", $datumv);
-    $stmt->bindParam(":ph_tijd", $tijdv);
-    $stmt->bindParam(":ph_opmerkingen", $opmerkingenv);
-    $stmt->bindParam(":ph_kosten", $kostenv);
-    header("location: dashboardMedewerkers.php");
-    $stmt->execute();
-}
-?>
+
+    if (isset($_POST['form_reparaties'])) {
+        $titelv = $_POST['form_titel'];
+        $datumv = $_POST['form_datum'];
+        $tijdstipv = $_POST['form_tijdstip'];
+        $opmerkingv = $_POST['form_opmerking'];
+        $kostenv = $_POST['form_kosten'];
+        $fietsidv = $_POST['form_fietsid'];
+    
+
+        $sql = "INSERT INTO reparatie (titel, datum, tijdstip, opmerking, kosten, fiets_id) VALUES (:ph_titel,:ph_datum,:ph_tijdstip,:ph_opmerking,:ph_kosten,:ph_fietsid)";
+        $stmt = $db_conn->prepare($sql);
+        $stmt->bindParam(":ph_titel", $titelv);
+        $stmt->bindParam(":ph_datum", $datumv);
+        $stmt->bindParam(":ph_tijdstip", $tijdstipv);
+        $stmt->bindParam(":ph_opmerking", $opmerkingv);
+        $stmt->bindParam(":ph_kosten", $kostenv);
+        $stmt->bindParam(":ph_fietsid", $fietsidv);
+        $stmt->execute();
+      
+//var_dump(2)
+           echo "<script>window.location.href='dashboardMedewerkers.php';</script>";
+            exit;
+          }
+    
+    ?>
+
 
 
 <!DOCTYPE html>
@@ -37,7 +47,7 @@ if (isset($_POST['form_reparatie'])) {
 </head>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Dashboard</a>
+        <a class="navbar-brand" href="dashboardMedewerkers.php">Dashboard</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,20 +64,20 @@ if (isset($_POST['form_reparatie'])) {
         <form method="post" action=" ">
             <h1 class="h3 mb-3 fw-normal">reparatie toevoegen</h1>
 
-            <input type="hidden" name="form_fiets" value="<?php echo
+            <input type="hidden" name="form_reparatie" value="<?php echo
                                                             $_SESSION['id'] ?>">
 
             <label for="form_titel" class="visually-hidden">titel</label>
             <input type="titel" id="form_titel" class="form-control" name="form_titel" placeholder="titel" required autofocus>
 
-            <label for="form_tijd" class="visually-hidden">tijd</label>
-            <input type="time" id="form_tijd" class="form-control" name="form_tijd" placeholder="tijd" required autofocus>
-
-            <label for="form_datum" class="visually-hidden">datum</label>
+            <label for="form_datum" class="visually-hidden">Datum</label>
             <input type="date" id="form_datum" class="form-control" name="form_datum" placeholder="datum" required autofocus>
 
-            <label for="form_opmerkingen" class="visually-hidden">Opmerkingen</label>
-            <input type="opmerkingen" id="form_opmerkingen" class="form-control" name="form_opmerkingen" placeholder="opmerkingen" required autofocus>
+            <label for="form_tijdstip" class="visually-hidden">Tijdstip</label>
+            <input type="time" id="form_tijdstip" class="form-control" name="form_tijdstip" placeholder="tijdstip" required autofocus>
+
+            <label for="form_opmerking" class="visually-hidden">Opmerkingen</label>
+            <input type="opmerking" id="form_opmerking" class="form-control" name="form_opmerking" placeholder="opmerking" required autofocus>
 
             <label for="form_kosten" class="visually-hidden">Kosten</label>
             <input type="kosten" id="form_kosten" class="form-control" name="form_kosten" placeholder="kosten" required>
@@ -75,7 +85,7 @@ if (isset($_POST['form_reparatie'])) {
 
 
 
-            <button class="w-100 btn btn-lg btn-primary" name="form_reparatie" type="submit">add</button>
+            <button class="w-100 btn btn-lg btn-primary" name="form_reparaties" type="submit">add</button>
 
         </form>
     </main>

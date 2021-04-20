@@ -8,24 +8,27 @@ if (isset($_POST['form_fiets'])) {
     $modelv = $_POST['form_model'];
     $typev = $_POST['form_type'];
     $kleurv = $_POST['form_kleur'];
-    $remsoortv = $_POST['form_rem'];
+    $remv = $_POST['form_rem'];
+    $gebruikerid = $_POST['form_gebruikerid'];
 
-    $sql = "INSERT INTO fiets (merk, model, type, kleur, rem) VALUES (:ph_merk,:ph_model,:ph_type,:ph_kleur,:ph_remsoort)";
+    $sql = "INSERT INTO fiets (merk, model, type, kleur, rem, gebruiker_id) VALUES (:ph_merk,:ph_model,:ph_type,:ph_kleur,:ph_rem,:ph_gebruikerid)";
     $stmt = $db_conn->prepare($sql);
     $stmt->bindParam(":ph_merk", $merkv);
     $stmt->bindParam(":ph_model", $modelv);
     $stmt->bindParam(":ph_type", $typev);
     $stmt->bindParam(":ph_kleur", $kleurv);
-    $stmt->bindParam(":ph_remsoort", $remsoortv);
-    header("location: dashboard.php");
-
+    $stmt->bindParam(":ph_rem", $remv);
+    $stmt->bindParam(":ph_gebruikerid", $gebruikerid);
     $stmt->execute();
+    echo "<script>window.location.href='dashboard.php';</script>";
+    exit;
+    
 }
 ?>
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">+
 
 <head>
     <link href="CSS/login.css" rel="stylesheet">
@@ -57,6 +60,7 @@ if (isset($_POST['form_fiets'])) {
 
             <input type="hidden" name="form_fiets" value="<?php echo
                                                             $_SESSION['id'] ?>">
+           >                                
 
             <label for="form_merk" class="visually-hidden">Merk</label>
             <input type="merk" id="form_merk" class="form-control" name="form_merk" placeholder="merk" required autofocus>
@@ -70,9 +74,12 @@ if (isset($_POST['form_fiets'])) {
             <label for="form_kleur" class="visually-hidden">Kleur</label>
             <input type="kleur" id="form_kleur" class="form-control" name="form_kleur" placeholder="kleur" required>
 
-            <label for="form_rem" class="visually-hidden">Rem soort</label>
+            <label for="form_rem" class="visually-hidden">Rem</label>
             <input type="rem" id="form_rem" class="form-control" name="form_rem" placeholder="rem" required>
 
+
+            <label for="form_gebruikerid" class="visually-hidden">ID</label>
+            <input type="gebruikerid" id="form_gebruikerid" class="form-control" name="form_gebruikerid" placeholder="gebruikerid" required>
 
             <button class="w-100 btn btn-lg btn-primary" name="form_fiets" type="submit">add</button>
 

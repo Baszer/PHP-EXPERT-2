@@ -1,10 +1,10 @@
 <?php
-require "db.conn.php";
+include "db.conn.php";
 session_start();
 error_reporting(0);
 require "menu.php";
 
-if (isset($_POST['form_add'])){
+if (isset($_POST['form_addmedewerker'])){
 
   $email = $_POST['form_email'];
   $FName = $_POST['form_FName'];
@@ -12,24 +12,23 @@ if (isset($_POST['form_add'])){
   $password = $_POST['form_password'];
   $email = $_POST['form_email'];
   $telefoon = $_POST['form_telefoon'];
-  $adres = $_POST['form_adres'];
-  $location = $_POST['form_locatie'];
-  $tijd = $_POST['form_time'];
+  
   
 
 
-  $sql = "INSERT INTO medewerkers (firstname, lastname, password, email, telefoonnummer, location, adress, birthdate) VALUES (:ph_FName,:ph_LName,:ph_password,:ph_email, :ph_telefoon,:ph_adres,  :ph_location ,:ph_birthdate)";
+  $sql = "INSERT INTO medewerkers (voornaam, achternaam, password, email, telefoonnummer) VALUES (:ph_FName,:ph_LName,:ph_password,:ph_email, :ph_telefoon)";
   $stmt = $db_conn->prepare($sql);
   $stmt->bindParam(":ph_FName", $FName);
   $stmt->bindParam(":ph_LName", $LName);
   $stmt->bindParam(":ph_email", $email);
   $stmt->bindParam(":ph_telefoon", $telefoon);
   $stmt->bindParam(":ph_password", $password);
-  $stmt->bindParam(":ph_adres", $adres);
-  $stmt->bindParam(":ph_location", $location);
-  $stmt->bindParam(":ph_birthdate", $tijd);
-  header("location: dashboardMedewerkers.php");
   $stmt->execute();
+
+    echo "<script>window.location.href='dashboardMedewerkers.php';</script>";
+    exit;
+  
+
 }
 
 ?>
@@ -48,7 +47,7 @@ if (isset($_POST['form_add'])){
 </head>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Dashboard</a>
+    <a class="navbar-brand" href="dashboardMedewerkers.php">Dashboard</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> 
@@ -82,17 +81,8 @@ if (isset($_POST['form_add'])){
         <label for="form_telefoon" class="visually-hidden">phone number</label>
         <input type="task" id="form_telefoon" class="form-control" name="form_telefoon" placeholder="Telefoonnummer" required>
         
-        <label for="form_adres" class="visually-hidden">Adress</label>
-        <input type="adres" id="form_adres" class="form-control" name="form_adres" placeholder="Adres" required>
 
-        <label for="form_locatie" class="visually-hidden">Location</label>
-        <input type="location" id="form_locatie" class="form-control" name="form_locatie" placeholder="Locatie" required>
-
-        <label for="form_time" class="visually-hidden">geboorte datum</label>
-        <input type="date" id="form_time" class="form-control" name="form_time" placeholder="time" required>
-
-
-        <button class="w-100 btn btn-lg btn-primary" name="form_add" type="submit">add</button>
+        <button class="w-100 btn btn-lg btn-primary" name="form_addmedewerker" type="submit">add</button>
         
       </form>
     </main>
