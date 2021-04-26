@@ -58,12 +58,12 @@ $klusid = $_GET['id'];
       <a href='dashboardMedewerkers.php' class='btn btn-primary'>Ga Terug</a>
       <?php
 
-      $stmttasks = $db_conn->prepare("SELECT * FROM users WHERE id = '$klusid'");
+      $stmttasks = $db_conn->prepare("SELECT * FROM gebruikers WHERE id = '$klusid'");
       $stmttasks->execute();
         foreach($stmttasks as $rows){
             $uid = $rows['id'];
-            $voornaam = $rows['firstname'];
-            $achternaam = $rows['lastname'];
+            $voornaam = $rows['voornaam'];
+            $achternaam = $rows['achternaam'];
             $password = $rows['password'];
             $emailpf = $rows['email'];
             $telefoon = $rows['telefoonnummer'];

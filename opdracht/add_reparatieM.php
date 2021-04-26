@@ -22,9 +22,9 @@ error_reporting(0);
         $stmt->bindParam(":ph_opmerking", $opmerkingv);
         $stmt->bindParam(":ph_kosten", $kostenv);
         $stmt->bindParam(":ph_fietsid", $fietsidv);
+        
         $stmt->execute();
-      
-//var_dump(2)
+    
            echo "<script>window.location.href='dashboardMedewerkers.php';</script>";
             exit;
           }
@@ -83,7 +83,8 @@ error_reporting(0);
             <input type="kosten" id="form_kosten" class="form-control" name="form_kosten" placeholder="kosten" required>
 
 
-
+            <label for="form_fietsid" class="visually-hidden">Fiets ID</label>
+            <input type="fietsid" id="form_fietsid" class="form-control" name="form_fietsid" placeholder="fietsid" required>
 
             <button class="w-100 btn btn-lg btn-primary" name="form_reparaties" type="submit">add</button>
 

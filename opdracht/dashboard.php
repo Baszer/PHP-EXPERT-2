@@ -90,7 +90,7 @@ $userid = $_SESSION['id'];
       </div>
       <div class="card">
    <div class="card-head">
-     <h3>mijn reparaties</h3>
+     <h3>Geplande reparaties</h3>
     </div>
    
   <table class="tableTasks">
@@ -98,24 +98,37 @@ $userid = $_SESSION['id'];
                   <th>titel</th>
                   <th>datum</th>
                   <th>tijdstip</th>
-                  <th>opmerkingen</th>
+                  <th>Persoon</th>
                   <th>kosten</th>
                   <th>Kijken</th>
                 </tr>
                 <?php
                 
-                         $stmttasks = $db_conn->prepare("SELECT * FROM reparatie WHERE user_id = '$userid'");
-                         $stmttasks->execute();
-                           foreach($stmttasks as $rows){
-                            $uemail = $rows['id'];
-                              echo "<tr><td>" . $rows['titel']. "</td>";
-                              echo "<td>" . $rows['datum']. "</td>";
-                              echo "<td>" . $rows['tijdstip']. "</td>";
-                              echo "<td>" . $rows['opmerking']. "</td>";
-                              echo "<td>" . $rows['kosten']. "</td>";
-                              echo "<td><a class='btn btn-warning' href='view_fiets.php?id=$uemail'><i class='fas fa-eye'> </i></a></tr>";
+                         //$stmttasks = $db_conn->prepare("SELECT * FROM reparatie WHERE fiets_id = '$userid'");
+                         //$stmttasks->execute();
+                           //foreach($stmttasks as $rows){
+                            //$uemail = $rows['id'];
+                              //echo "<tr><td>" . $rows['titel']. "</td>";
+                              //echo "<td>" . $rows['datum']. "</td>";
+                              //echo "<td>" . $rows['tijdstip']. "</td>";
+                              //echo "<td>" . $rows['opmerking']. "</td>";
+                              //echo "<td>" . $rows['kosten']. "</td>";
+                              //echo "<td><a class='btn btn-warning' href='view_fiets.php?id=$uemail'><i class='fas fa-eye'> </i></a></tr>";
                              
-                           }
+                          
+                              $stmttasks = $db_conn->prepare("SELECT * FROM reparatie");  //JOIN fiets on fiets_id = reparatie.fiets_id
+                              $stmttasks->execute();
+                              foreach ($stmttasks as $rows) {
+                                $uemail = $rows['id'];
+                                echo "<tr><td>" . $rows['titel'] . "</td>";
+                                echo "<td>" . $rows['datum'] . "</td>";
+                                echo "<td>" . $rows['tijdstip'] . "</td>";
+                                echo "<td>" . $rows['opmerking'] . "</td>";
+                                echo "<td>" . $rows['kosten'] . "<a>€</a></td>";
+                                echo "<td>" . $rows['merk'] . "</td>";
+                                
+                          
+                            }
                     ?>
             </table>
              

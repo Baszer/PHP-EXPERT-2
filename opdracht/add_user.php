@@ -14,7 +14,7 @@ if (isset($_POST['form_add'])){
   
 
 
-  $sql = "INSERT INTO users (voornaam, achternaam, password, email, telefoonnummer) VALUES (:ph_FName,:ph_LName,:ph_password,:ph_email, :ph_telefoon)";
+  $sql = "INSERT INTO gebruikers (voornaam, achternaam, wachtwoord, email, telefoonnummer) VALUES (:ph_FName,:ph_LName,:ph_password,:ph_email, :ph_telefoon)";
   $stmt = $db_conn->prepare($sql);
   $stmt->bindParam(":ph_FName", $FName);
   $stmt->bindParam(":ph_LName", $LName);

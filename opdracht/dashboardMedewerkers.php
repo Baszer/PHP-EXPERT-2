@@ -76,6 +76,7 @@ require "menu.php";
           echo "<td>" . $rows['type'] . "</td>";
           echo "<td>" . $rows['rem'] . "</td>";
           echo "<td>" . $rows['kleur'] . "</td>";
+      
           echo "<td><a class='btn btn-warning' href='update_fiets.php?id=$uemail'><i class='fas fa-pencil-alt'> </i></a>";
           echo "<a class='btn btn-warning' href='delete_fiets.php?id=$uemail'><i class='fas fa-times'> </i></a></td></tr>";
         }
@@ -94,27 +95,34 @@ require "menu.php";
           <th>titel</th>
           <th>datum</th>
           <th>tijdstip</th>
-          <th>opmerkingen</th>
+          <th>Naam</th>
           <th>kosten</th>
           <th>Merk</th>
+          <th>Opmerkingen</th>
           <th>Bewerken</th>
+
         </tr>
         <?php
-        $stmttasks = $db_conn->prepare("SELECT * FROM reparatie");  //JOIN fiets on fiets_id = reparatie.fiets_id
+        $stmttasks = $db_conn->prepare("SELECT *, gebruikers.voornaam FROM reparatie JOIN fiets on reparatie.fiets_id = fiets.id JOIN gebruikers on fiets.gebruiker_id = gebruikers.id");  //JOIN fiets on fiets_id = reparatie.fiets_id
         $stmttasks->execute();
         foreach ($stmttasks as $rows) {
+          $naam = $rows['voornaam'];
+          $kosten = $rows['kosten'];
           $uemail = $rows['id'];
           echo "<tr><td>" . $rows['titel'] . "</td>";
           echo "<td>" . $rows['datum'] . "</td>";
           echo "<td>" . $rows['tijdstip'] . "</td>";
-          echo "<td>" . $rows['opmerking'] . "</td>";
+          echo "<td>" . $rows['voornaam'] . "<a></a></td>";
           echo "<td>" . $rows['kosten'] . "<a>€</a></td>";
           echo "<td>" . $rows['merk'] . "</td>";
+          echo "<td>" . $rows['opmerking'] . "</td>";
 
 
 
           echo "<td><a class='btn btn-warning' href='update_reparatie.php?id=$uemail'><i class='fas fa-pencil-alt'> </i></a>";
           echo "<a class='btn btn-warning' href='delete_reparatie.php?id=$uemail'><i class='fas fa-times'> </i></a></td></tr>";
+          echo "<a class='btn btn-warning' href='sms_reparatie.php?klantnaam=$naam&kosten=$kosten'><i class='fas fa-air-freshener'> </i></a></td></tr>";
+
         }
         ?>
       </table>
